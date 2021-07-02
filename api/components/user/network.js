@@ -1,11 +1,55 @@
 const express = require('express');
 const router = express.Router();
-const response = require('../../../network/response')
-const Controller = require('./controller')
+
+const response = require('../../../network/response');
+const controller = require('./controller');
+//const Controller = require('./controller')
+const Controller = require('./index')
 
 router.get('/', function (req, res) {
-    const list = Controller.list();
-    response.success(req, res, list, 200);
+    console.log("aqui get");
+    const list = Controller.list()
+        .then( (user) => {
+            response.success(req, res, user, 200);
+        })
+        .catch( (err) => {
+            response.error(req, res, err.message, 500);
+        })
+    
 })
+
+router.get('/:id', function (req, res) {
+    const list = Controller.get(req.params.id)
+    .then( (user) => {
+        response.success(req, res, user, 200);
+    })
+    .catch( (err) => {
+        response.error(req, res, err.message, 500);
+    })
+    
+})
+
+router.post('/', function (req, res) {
+    console.log("aqui post");
+    const insert = Controller.insert(req.body)
+    .then( (user) => {
+        response.success(req, res, user, 200);
+    })
+    .catch( (err) => {
+        response.error(req, res, err.message, 500);
+    })
+})
+
+router.delete('/:id', function (req, res) {
+    console.log("aqui post");
+    const remove = Controller.remove(req.body)
+    .then( (user) => {
+        response.success(req, res, user, 200);
+    })
+    .catch( (err) => {
+        response.error(req, res, err.message, 500);
+    })
+})
+
 
 module.exports = router;

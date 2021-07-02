@@ -4,7 +4,8 @@
   "description": "curso de node",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon api/index.js"
   },
   "keywords": [
     "node"
@@ -12,6 +13,8 @@
   "author": "Bryan Silva",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "nanoid": "^3.1.23",
+    "swagger-ui-express": "^4.1.6"
   }
 }
