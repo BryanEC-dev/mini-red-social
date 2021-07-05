@@ -30,7 +30,6 @@ router.get('/:id', function (req, res) {
 })
 
 router.post('/', function (req, res) {
-    console.log("aqui post");
     const insert = Controller.insert(req.body)
     .then( (user) => {
         response.success(req, res, user, 200);

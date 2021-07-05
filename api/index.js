@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require("../config.js")
 const user = require('./components/user/network')
+const auth = require('./components/auth/network');
 const swaggerUi = require('swagger-ui-express')
 
 const swaggerDocument = require('./swagger.json');
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // routes 
 app.use('/api/user', user)
+app.use('/api/auth', auth)
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // escuche por el puerto configurado

@@ -12,7 +12,11 @@ async function get(table,id){
     return col.filter(item => item.id === id)[0] || null;
 }
 async function upsert(table,data){
+    if(!db[table]) {
+        db[table] = [];
+    }
     await db[table].push(data);
+    console.log(db);
     return db[table];
 }
 async function remove(table,id){
@@ -22,10 +26,18 @@ async function remove(table,id){
     return db[table];
 }
 
+async function query(table,_query){
+
+    let col = await list(table);
+    let keys = Object.keys(_query);
+    let key = keys[0];
+    return col.filter(item => item[key] === _query[key])[0] || null;
+}
 
 module.exports = {
     list,
     get,
     upsert,
     remove,
+    query,
 }
