@@ -36,6 +36,10 @@ module.exports = function (injectedStore){
         return store.upsert(TABLE,user)
     }
 
+    function update(body) {
+        return store.update(TABLE,body)
+    }
+
     function remove(id) {
         return store.remove(TABLE,id)
     }
@@ -45,6 +49,7 @@ module.exports = function (injectedStore){
         get,
         insert,
         remove,
+        update,
     };
 }
 

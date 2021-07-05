@@ -34,10 +34,26 @@ async function query(table,_query){
     return col.filter(item => item[key] === _query[key])[0] || null;
 }
 
+async function update(table,body) {
+    let col = await list(table);
+    data = col.filter(item => item.id === body.id)[0] || null;
+    
+    if(data){
+        data.name = body.name;
+        return col.filter(item => item.id === body.id)
+    }else {
+        return "No existe el usuario"
+    }
+
+   
+
+}
+
 module.exports = {
     list,
     get,
     upsert,
     remove,
     query,
+    update,
 }

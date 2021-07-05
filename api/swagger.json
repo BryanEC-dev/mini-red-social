@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "Una red social en NodeJS",
+    "description": "Aplicación practica en express",
     "version": "1.0.0",
-    "title": "Red Social",
+    "title": "Express",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "bryansilva021@hotmail.com"
@@ -39,6 +39,9 @@
         "responses": {
           "default": {
             "description": "successful operation"
+          },
+          "200": {
+            "description": "successful operation"
           }
         }
       },
@@ -61,6 +64,93 @@
             "schema": {
               "$ref": "#/definitions/User"
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ApiResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Actualiza un usuario",
+        "description": "Actualiza la información de un usuario",
+        "operationId": "updateUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "usuario actualizado",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema" : {
+              "$ref" : "#/definitions/ApiResponse"
+            }
+          }
+        }
+      }
+    },
+    "/user/{userId}" : {
+      "get": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Lista de usuario",
+        "description": "Lista los usuarios",
+        "operationId": "listUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID del usuario",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "user"
+        ],
+        "summary": "Elimina un usuario por id",
+        "description": "Elimina un usuario por identificador",
+        "operationId": "deleteUser",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "ID del usuario",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -107,13 +197,15 @@
       "properties": {
         "code": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 200
         },
-        "type": {
-          "type": "string"
+        "error": {
+          "type": "boolean",
+          "default": false
         },
-        "message": {
-          "type": "string"
+        "body": {
+          "type": "object"
         }
       }
     }
