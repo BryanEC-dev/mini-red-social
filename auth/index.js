@@ -6,7 +6,14 @@ const secret = config.jwt.secret;
 
 // genera el token
 function sign(data) {
-    return jwt.sign(data, secret);
+    console.log(data);
+    try {
+        return jwt.sign(data, secret);
+    } catch (error) {
+        console.error(error);
+        next(error)
+    }
+   
 }
 
 // verifica el token
@@ -20,14 +27,16 @@ function verify(token) {
 const check = {
     own: function(req, owner) {
         const decoded = decodeHeader(req);
-        console.log(decoded);
-
         if(decoded.id !== owner){
            throw error("No puedes realizar esta acción",401)
         }
 
         /* return next(); */
         // comprobar si es o no propio
+    },
+
+    logged: function(req) {
+        const decoded = decodeHeader(req);
     },
 }
 
