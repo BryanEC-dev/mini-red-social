@@ -44,14 +44,27 @@ function list(table, id) {
     })
 }
 
-function get(table, id) {
+function get(table, data) {
     return new Promise( (resolve, reject) => {
-        connection.query(`SELECT * FROM ${table} where id= ${id}`, (err, data) => {
-            if (err) return reject(err);
+        console.log(data);
+        connection.query(`SELECT * FROM ${table} where ?`, data, (err, data) => {
+            if (err) {
+                console.error(err);
+                return reject(err);
+            } 
             resolve(data);
         })
     })
 }
+
+/* function get(table, id) {
+    return new Promise( (resolve, reject) => {
+        connection.query(`SELECT * FROM ${table} where ?`, (err, data) => {
+            if (err) return reject(err);
+            resolve(data);
+        })
+    })
+} */
 
 function insert(table, data) {
     return new Promise( (resolve, reject) => {

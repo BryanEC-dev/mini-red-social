@@ -22,6 +22,15 @@ router.get('/', function (req, res) {
     
 })
 
+/* router.get('/follow/', secure('follow'),  function (req, res, next) {
+    console.log("follow");
+    Controller.followAll(req.user.data.id)
+    .then( data => {
+        response.success(req, res, data, 201);
+    })
+    .catch(next);
+}) */
+
 router.post('/', function (req, res) {
     const insert = Controller.insert(req.body)
     .then( (user) => {
@@ -69,7 +78,17 @@ router.delete('/:id', function (req, res) {
     })
 })
 
-/*  */
+/* follow */
+
+router.get('/follow/', secure('follow'),  function (req, res, next) {
+    console.log("follow");
+    Controller.followAll(req.user.data.id)
+    .then( data => {
+        response.success(req, res, data, 201);
+    })
+    .catch(next);
+})
+
 router.post('/follow/:id', secure('follow'),  function (req, res, next) {
     console.log(req.user);
     Controller.follow(req.user.data.id, req.params.id)
@@ -78,5 +97,7 @@ router.post('/follow/:id', secure('follow'),  function (req, res, next) {
     })
     .catch(next);
 })
+
+
 
 module.exports = router;

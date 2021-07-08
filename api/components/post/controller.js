@@ -1,6 +1,6 @@
 const {nanoid} = require('nanoid');
 const auth = require('../auth');
-const TABLE = 'user';
+const TABLE = 'post';
 
 
 module.exports = function (injectedStore){
@@ -46,28 +46,9 @@ module.exports = function (injectedStore){
         return store.remove(TABLE,id)
     }
 
-     function follow(from, to) {
-        return store.upsert(TABLE + '_follow', {
-            user_from: from,
-            user_to: to,
-        });
-    }
-
-    function followAll(userId) {
-        console.log(`userId ${userId}`);
-        return store.get(TABLE + '_follow',{
-            user_from: userId
-        })
-    }
 
     return {
         list,
-        get,
-        insert,
-        remove,
-        update,
-        follow,
-        followAll,
     };
 }
 
