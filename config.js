@@ -8,12 +8,15 @@ module.exports = {
     },
 
     mysql: {
-        host : process.env.MYSQL_HOST || 'remotemysql.com',
-        user : process.env.MYSQL_USER || 'k8fOgsar8k',
-        password : process.env.MYSQL_PASSWORD || 'X1IaOvNtYi',
-        database : process.env.MYSQL_DATABASE || 'k8fOgsar8k',
+        host : process.env.MYSQL_HOST || 'localhost',
+        port : process.env.MYSQL_PORT || '3306',
+        user : process.env.MYSQL_USER || 'root',
+        password : process.env.MYSQL_PASSWORD || '984704jbldhdir.',
+        database : process.env.MYSQL_DATABASE || 'curso_practico_node',
     },
     mysqlService: {
         port: process.env.MYSQL_SRV_PORT || 3001,
+        host: process.env.MYSQL_SRV_HOST || 'localhost',
+        
     }
 }
